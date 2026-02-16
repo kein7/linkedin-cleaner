@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "LinkedIn Job Cleaner Pro",
-  "version": "1.1",
+  "name": "LinkedIn Job Cleaner",
+  "version": "1.0",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
