@@ -1,4 +1,4 @@
-# LinkedIn Job Cleaner Pro 🧹
+# LinkedIn Job Cleaner 🧹
 
 A lightweight Chrome Extension designed to declutter your LinkedIn job search by automatically hiding Promoted listings. Focus on real opportunities and stop scrolling through the same ads over and over.
 
@@ -50,4 +50,5 @@ JavaScript (ES6+): For DOM manipulation and mutation tracking.
 Chrome Storage API: To persist user preferences and statistics.
 
 HTML/CSS: For the popup interface.
+
 
