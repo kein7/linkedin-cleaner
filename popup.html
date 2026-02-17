@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body { width: 200px; padding: 15px; font-family: sans-serif; text-align: center; }
-    .status { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
-    .count { color: #0a66c2; font-size: 2rem; display: block; margin: 10px 0; }
-    button { cursor: pointer; padding: 8px 15px; border-radius: 20px; border: 1px solid #0a66c2; background: white; color: #0a66c2; }
-    button.active { background: #0a66c2; color: white; }
-  </style>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="status">Job Cleaner</div>
-  <span class="count" id="counter">0</span>
-  <p>Anuncios bloqueados</p>
-  <button id="toggleBtn">Cargando...</button>
+  <div class="header">
+    <h2>Web Optimizer</h2>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-target="tab-linkedin">LinkedIn</button>
+    <button class="tab-btn" data-target="tab-blacklist">JS Shield</button>
+  </div>
+
+  <div id="tab-linkedin" class="tab-content active">
+    <div class="stat-box">
+      <span id="counter">0</span>
+      <p>Anuncios eliminados</p>
+    </div>
+    <div class="control-group">
+      <label class="switch">
+        <input type="checkbox" id="link-toggle" checked>
+        <span class="slider"></span>
+      </label>
+      <span>Limpiador de Empleos</span>
+    </div>
+  </div>
+
+  <div id="tab-blacklist" class="tab-content">
+    <p>Bloquear carga de JS en:</p>
+    <textarea id="blacklist-urls" placeholder="ejemplo.com&#10;otraweb.org"></textarea>
+    <button id="save-blacklist" class="primary-btn">Guardar Lista</button>
+    <p class="hint">Escribe un dominio por línea</p>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>

@@ -1,15 +1,28 @@
 {
   "manifest_version": 3,
-  "name": "LinkedIn Job Cleaner",
-  "version": "1.0",
-  "permissions": ["storage"],
+  "name": "Web Optimizer",
+  "version": "2.0",
+  "permissions": ["declarativeNetRequest", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "declarative_net_request": {
+    "rule_resources": [{
+      "id": "ruleset_1",
+      "enabled": true,
+      "path": "rules.json"
+    }]
+  },
   "action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/jobs/*"],
-      "js": ["content.js"]
+      "matches": ["<all_urls>"],
+      "js": [
+        "core/storage.js",
+        "modules/linkedin.js",
+        "modules/jsshield.js",
+        "content_main.js"
+      ]
     }
   ]
 }

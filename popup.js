@@ -1,27 +1,46 @@
-const btn = document.getElementById('toggleBtn');
-const counterEl = document.getElementById('counter');
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
 
-// Cargar estado inicial
-chrome.storage.local.get(['enabled', 'blockedCount'], (data) => {
-  const isEnabled = data.enabled !== false; // true por defecto
-  updateUI(isEnabled);
-  counterEl.innerText = data.blockedCount || 0;
-});
+    // --- Lógica de Pestañas ---
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.target;
 
-btn.onclick = () => {
-  chrome.storage.local.get('enabled', (data) => {
-    const newState = !(data.enabled !== false);
-    chrome.storage.local.set({ enabled: newState }, () => {
-      updateUI(newState);
-      // Recargar la pestaña para aplicar cambios (opcional)
-      chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-        chrome.tabs.reload(tabs[0].id);
-      });
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(target).classList.add('active');
+        });
     });
-  });
-};
 
-function updateUI(enabled) {
-  btn.innerText = enabled ? 'Desactivar' : 'Activar';
-  btn.className = enabled ? 'active' : '';
-}
+    // --- Módulo LinkedIn ---
+    const linkToggle = document.getElementById('link-toggle');
+    const counterEl = document.getElementById('counter');
+
+    chrome.storage.local.get(['enabled', 'blockedCount', 'blacklist'], (data) => {
+        linkToggle.checked = data.enabled !== false;
+        counterEl.innerText = data.blockedCount || 0;
+        if (data.blacklist) {
+            document.getElementById('blacklist-urls').value = data.blacklist.join('\n');
+        }
+    });
+
+    linkToggle.onchange = () => {
+        chrome.storage.local.set({ enabled: linkToggle.checked });
+    };
+
+    // --- Módulo Blacklist General ---
+    const saveBtn = document.getElementById('save-blacklist');
+    saveBtn.onclick = () => {
+        const urls = document.getElementById('blacklist-urls').value
+            .split('\n')
+            .map(url => url.trim())
+            .filter(url => url.length > 0);
+
+        chrome.storage.local.set({ blacklist: urls }, () => {
+            alert('Lista guardada. Se bloqueará JS en estos dominios.');
+        });
+    };
+});
