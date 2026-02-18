@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Web Optimizer",
+  "name": "Web Zen 🧘‍♂️",
   "version": "2.0",
   "permissions": ["declarativeNetRequest", "storage"],
   "host_permissions": ["<all_urls>"],
